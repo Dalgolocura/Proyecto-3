@@ -1,10 +1,11 @@
 import string
 import random
+from time import process_time as timer
 
 
 def main():
-    ncasos = 500000
-    naleatorios = int(ncasos * 0.5)
+    ncasos = 1000000
+    naleatorios = int(ncasos * 0.25)
     nincorrectos = int(ncasos * 0.25)
     ncorrectos = ncasos - naleatorios - nincorrectos - 4
     print(ncasos, ncorrectos, naleatorios, nincorrectos)
@@ -28,6 +29,7 @@ def main():
     cadena = procesarCadena("William", filepalabras)
     file.write(cadena + "\n")
 
+    start = timer()
     for i in range(ncorrectos):
         palabra = None
         while palabra is None:
@@ -35,21 +37,35 @@ def main():
 
         palabra = palabra.replace("-", "").replace(" ", "").replace("'", "")
         cadena = procesarCadena(palabra, filepalabras)
-        print(i, palabra)
         file.write(cadena + "\n")
 
+        if i % int(ncorrectos * 0.05) == 0:
+            print(int(round(i / ncorrectos,2)*100), "% de palabras normales")
+    elapsed_time = timer() - start
+    print("Time: %.10f" % elapsed_time)
+
+    start = timer()
     for i in range(naleatorios):
         tamanio = random.randint(1, 10**4)
         cadena = generar_caso(tamanio, filepalabras)
-        print(i)
         file.write(cadena + "\n")
 
+        if i % int(naleatorios * 0.05) == 0:
+            print(int(round(i / naleatorios,2)*100), "% de palabras aleatorias")
+    elapsed_time = timer() - start
+    print("Time: %.10f" % elapsed_time)
+
+    start = timer()
     for i in range(nincorrectos):
         cadena = ''.join(random.choice(string.ascii_lowercase)
                          for i in range(random.randint(1, 10**4)))
-        print(i)
         file.write(cadena + "\n")
         filepalabras.write("NO EXISTE\n")
+
+        if i % int(nincorrectos * 0.05) == 0:
+            print(int(round(i / nincorrectos,2)*100), "% de palabras incorrectas")
+    elapsed_time = timer() - start
+    print("Time: %.10f" % elapsed_time)
 
     file.close()
     filepalabras.close()
