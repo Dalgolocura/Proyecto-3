@@ -1,14 +1,18 @@
 import string
 import random
-from random_word import RandomWords
 
 
 def main():
     ncasos = 500000
-    ncorrectos = int(ncasos * 0.25) - 4
-    naleatorios = ncasos - int(ncasos * 0.5)
+    naleatorios = int(ncasos * 0.5)
     nincorrectos = int(ncasos * 0.25)
+    ncorrectos = ncasos - naleatorios - nincorrectos - 4
     print(ncasos, ncorrectos, naleatorios, nincorrectos)
+
+    filepalabras = open("generar/lemario.txt", "r")
+    linea = filepalabras.readline()
+    palabras = linea.strip().split()
+    filepalabras.close()
 
     file = open(str(ncasos) + ".in", "w")
     filepalabras = open("s" + str(ncasos) + ".out", "w")
@@ -24,11 +28,10 @@ def main():
     cadena = procesarCadena("William", filepalabras)
     file.write(cadena + "\n")
 
-    r = RandomWords()
     for i in range(ncorrectos):
         palabra = None
         while palabra is None:
-            palabra = r.get_random_word(hasDictionaryDef="true")
+            palabra = random.choice(palabras)
 
         palabra = palabra.replace("-", "").replace(" ", "").replace("'", "")
         cadena = procesarCadena(palabra, filepalabras)
