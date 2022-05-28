@@ -4,10 +4,10 @@ from random_word import RandomWords
 
 
 def main():
-    ncasos = 100
-    ncorrectos = int(ncasos * 0.5)
-    naleatorios = ncasos - int(ncasos * 0.75)
-    nincorrectos = ncasos - ncorrectos - naleatorios
+    ncasos = 500000
+    ncorrectos = int(ncasos * 0.25) - 4
+    naleatorios = ncasos - int(ncasos * 0.5)
+    nincorrectos = int(ncasos * 0.25)
     print(ncasos, ncorrectos, naleatorios, nincorrectos)
 
     file = open(str(ncasos) + ".in", "w")
@@ -15,9 +15,21 @@ def main():
 
     file.write(str(ncasos) + "\n")
 
+    cadena = procesarCadena("Borris", filepalabras)
+    file.write(cadena + "\n")
+    cadena = procesarCadena("Juliana", filepalabras)
+    file.write(cadena + "\n")
+    cadena = procesarCadena("Daniel", filepalabras)
+    file.write(cadena + "\n")
+    cadena = procesarCadena("William", filepalabras)
+    file.write(cadena + "\n")
+
     r = RandomWords()
     for i in range(ncorrectos):
-        palabra = r.get_random_word(hasDictionaryDef="true")
+        palabra = None
+        while palabra is None:
+            palabra = r.get_random_word(hasDictionaryDef="true")
+
         palabra = palabra.replace("-", "").replace(" ", "").replace("'", "")
         cadena = procesarCadena(palabra, filepalabras)
         print(i, palabra)
