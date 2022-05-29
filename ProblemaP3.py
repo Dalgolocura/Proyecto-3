@@ -15,6 +15,17 @@ def lectura():
     elapsed_time = timer() - start
     print("Time: %.10f" % elapsed_time)
 
+def lecturaConArchivo():
+    start = timer()
+    file = open("15.in", "r")
+    nCasos = int(file.readline())
+    while nCasos != 0:
+        linea = file.readline().replace('\n', '')
+        procesar(linea)
+        nCasos -= 1
+    elapsed_time = timer() - start
+    print("Time: %.10f" % elapsed_time)
+
 
 def procesar(entrada):
     letras_repeticiones = {}
@@ -39,9 +50,21 @@ def procesar(entrada):
 
     cantidad_palabra = sum(list(letras_cantidad.values()))
     palabra_original = entrada[0:cantidad_palabra]
+    funciona = True
 
-    salida = palabra_original + orden_eliminacion
-    print(salida)
+    for i in range(cantidad_palabra):
+        letra = palabra_original[i]
+        if letras_cantidad[letra] > 0:
+            letras_cantidad[letra] -= 1
+        else:
+            print("NO EXISTE")
+            funciona = False
+            break
+    if funciona:
+        salida = palabra_original + orden_eliminacion
+        print(salida)
 
 
 lectura()
+# lecturaConArchivo()
+
