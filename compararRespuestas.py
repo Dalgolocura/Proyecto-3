@@ -1,9 +1,9 @@
 file1 = open("ou.out", "r")
 # file2 = open("15.out", "r")
-file2 = open("20.out", "r")
+# file2 = open("20.out", "r")
 # file2 = open("100.out", "r")
 # file2 = open("500000.out", "r")
-# file2 = open("1000000.out", "r")
+file2 = open("out.out.txt", "r")
 fileSalida = open("compararResultados.txt", "w")
 
 
