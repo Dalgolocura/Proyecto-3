@@ -15,8 +15,8 @@ def lectura():
         # thread = threading.Thread(target=procesar, args=(linea,))
         # threads.append(thread)
         # thread.start()
-        # procesar(linea)
-        procesarCifrando(linea)
+        procesar(linea)
+        # procesarCifrando(linea)
 
         nCasos -= 1
 
@@ -29,12 +29,13 @@ def lectura():
 
 def lecturaConArchivo():
     start = timer()
-    file = open("in.in.txt", "r")
+    file = open("jijijija.in", "r")
     # file = open("500000.in", "r")
     nCasos = int(file.readline())
     while nCasos != 0:
         linea = file.readline().replace('\n', '')
-        procesar(linea)
+        # procesar(linea)
+        procesarCifrando(linea)
         nCasos -= 1
     elapsed_time = timer() - start
     print("Time: %.10f" % elapsed_time)
@@ -94,22 +95,32 @@ def procesarCifrando(entrada):
             letras_repeticiones[actual] = 1
             orden.append(actual)
 
+    # print(orden)
 
-    for i in range(1, len(entrada)):
+    for i in range(len(orden), len(entrada)):
         palabra = entrada[:i]
+
+        # print("palabra", palabra)
+
         cifrada = cifrarCadena(palabra, orden)
+        # print("cifrada", cifrada)
         if cifrada == entrada:
-            print(palabra, ''.join(orden))
+            print(cifrada, ''.join(orden[::-1]))
+            break
+        elif i == len(entrada)-1:
+            print("NO EXISTE")
 
 
 
 def cifrarCadena(cadena: str, letras: list):
     cadenaCopy = cadena
-    index = 0
+    index = len(letras) - 1
+    # print("tamaño copia", len(cadenaCopy))
     while len(cadenaCopy) > 0:
+        # print(index)
         letter = letras[index]
         cadenaCopy = cadenaCopy.replace(letter, "")
-        index += 1
+        index -= 1
         cadena += cadenaCopy
     return cadena
 
