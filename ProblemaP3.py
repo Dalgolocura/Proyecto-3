@@ -15,7 +15,8 @@ def lectura():
         # thread = threading.Thread(target=procesar, args=(linea,))
         # threads.append(thread)
         # thread.start()
-        procesar(linea)
+        # procesar(linea)
+        procesarCifrando(linea)
 
         nCasos -= 1
 
@@ -24,6 +25,7 @@ def lectura():
 
     elapsed_time = timer() - start
     print("Time: %.10f" % elapsed_time)
+
 
 def lecturaConArchivo():
     start = timer()
@@ -78,6 +80,38 @@ def procesar(entrada):
         salida = palabra_original + " " + orden_eliminacion
         print(salida)
 
+
+def procesarCifrando(entrada):
+
+    letras_repeticiones = {}
+    orden = []
+
+    for n in range(1, len(entrada)+1):
+        actual = entrada[-n]
+        if letras_repeticiones.get(actual) is not None:
+            letras_repeticiones[actual] += 1
+        else:
+            letras_repeticiones[actual] = 1
+            orden.append(actual)
+
+
+    for i in range(1, len(entrada)):
+        palabra = entrada[:i]
+        cifrada = cifrarCadena(palabra, orden)
+        if cifrada == entrada:
+            print(palabra, ''.join(orden))
+
+
+
+def cifrarCadena(cadena: str, letras: list):
+    cadenaCopy = cadena
+    index = 0
+    while len(cadenaCopy) > 0:
+        letter = letras[index]
+        cadenaCopy = cadenaCopy.replace(letter, "")
+        index += 1
+        cadena += cadenaCopy
+    return cadena
 
 lectura()
 # lecturaConArchivo()
