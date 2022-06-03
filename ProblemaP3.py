@@ -62,7 +62,10 @@ def procesar(entrada):
             print("NO EXISTE")
             funciona = False
             break
-    if funciona:
+
+    cifrada = cifrarCadena(palabra_original, orden_eliminacion.split(""))
+
+    if funciona and cifrada == entrada:
         salida = palabra_original + " " + orden_eliminacion
         print(salida)
 
