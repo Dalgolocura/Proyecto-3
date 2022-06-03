@@ -102,13 +102,13 @@ def procesarCifrando(entrada):
 
 def cifrarCadena(cadena: str, letras: list):
     cadenaCopy = cadena
-    index = len(letras) - 1
+    index = 0
     # print("tamaño copia", len(cadenaCopy))
     while len(cadenaCopy) > 0:
         # print(index)
         letter = letras[index]
         cadenaCopy = cadenaCopy.replace(letter, "")
-        index -= 1
+        index += 1
         cadena += cadenaCopy
     return cadena
 
