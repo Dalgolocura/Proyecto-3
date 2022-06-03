@@ -6,22 +6,10 @@ from time import process_time as timer
 def lectura():
     start = timer()
     nCasos = int(stdin.readline())
-    # threads = []
-    # print(nCasos)
     while nCasos != 0:
         linea = stdin.readline().replace('\n', '')
-        # print("lista", lista)
-
-        # thread = threading.Thread(target=procesar, args=(linea,))
-        # threads.append(thread)
-        # thread.start()
         procesar(linea)
-        # procesarCifrando(linea)
-
         nCasos -= 1
-
-    # for thread in threads:
-    #     thread.join()
 
     elapsed_time = timer() - start
     print("Time: %.10f" % elapsed_time)
@@ -51,8 +39,6 @@ def procesar(entrada):
         else:
             letras_repeticiones[actual] = 1
 
-    # letras = list(letras_repeticiones.keys())
-
     letras_cantidad = {}
     orden_eliminacion = ""
     cantidad_palabra = 0
@@ -65,7 +51,6 @@ def procesar(entrada):
         cantidad_palabra += veces
         orden_eliminacion = letra + orden_eliminacion
 
-    # cantidad_palabra = sum(list(letras_cantidad.values()))
     palabra_original = entrada[0:cantidad_palabra]
     funciona = True
 
