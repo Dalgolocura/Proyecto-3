@@ -59,7 +59,6 @@ def procesar(entrada):
         if letras_cantidad[letra] > 0:
             letras_cantidad[letra] -= 1
         else:
-            print("NO EXISTE")
             funciona = False
             break
 
@@ -114,6 +113,6 @@ def cifrarCadena(cadena: str, letras: list):
         cadena += cadenaCopy
     return cadena
 
-# lectura()
-lecturaConArchivo()
+lectura()
+# lecturaConArchivo()
 
