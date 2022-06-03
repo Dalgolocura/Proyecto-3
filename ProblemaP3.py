@@ -68,6 +68,8 @@ def procesar(entrada):
     if funciona and cifrada == entrada:
         salida = palabra_original + " " + orden_eliminacion
         print(salida)
+    else:
+        print("NO EXISTE")
 
 
 def procesarCifrando(entrada):
