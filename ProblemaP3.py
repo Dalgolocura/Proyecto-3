@@ -22,8 +22,8 @@ def lecturaConArchivo():
     nCasos = int(file.readline())
     while nCasos != 0:
         linea = file.readline().replace('\n', '')
-        # procesar(linea)
-        procesarCifrando(linea)
+        procesar(linea)
+        # procesarCifrando(linea)
         nCasos -= 1
     elapsed_time = timer() - start
     print("Time: %.10f" % elapsed_time)
@@ -63,7 +63,7 @@ def procesar(entrada):
             funciona = False
             break
 
-    cifrada = cifrarCadena(palabra_original, orden_eliminacion.split(""))
+    cifrada = cifrarCadena(palabra_original, list(orden_eliminacion))
 
     if funciona and cifrada == entrada:
         salida = palabra_original + " " + orden_eliminacion
@@ -112,6 +112,6 @@ def cifrarCadena(cadena: str, letras: list):
         cadena += cadenaCopy
     return cadena
 
-lectura()
-# lecturaConArchivo()
+# lectura()
+lecturaConArchivo()
 
